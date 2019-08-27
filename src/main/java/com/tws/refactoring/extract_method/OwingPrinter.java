@@ -6,24 +6,33 @@ import java.util.List;
 import java.util.Vector;
 
 public class OwingPrinter {
-    void printOwing(String name, List<Order> orders) {
-        Iterator<Order> elements = orders.iterator();
-        double outstanding = 0.0;
-
-        // print banner
+	
+    void printOwing(String name, List<Order> orders) {             
+        banner();      
+        double outstanding=getOutstanding(orders);   
+        owings( name,outstanding);
+    }
+    
+    // print banner
+    void  banner() { 	
         System.out.println ("*****************************");
         System.out.println ("****** Customer totals ******");
         System.out.println ("*****************************");
-
-        // print owings
-        while (elements.hasNext()) {
-            Order each = (Order) elements.next();
-            outstanding += each.getAmount();
-        }
-
-        // print details
-        System.out.println("name: " + name);
-        System.out.println("amount: " + outstanding);
+    }
+    // print owings
+   double getOutstanding(List<Order> orders) {
+    	 Iterator<Order> elements = orders.iterator();
+         double outstanding = 0.0;
+         while (elements.hasNext()) {
+             Order each = (Order) elements.next();
+             outstanding += each.getAmount();
+         }
+         return outstanding ;
+    }
+    // print details
+    void  owings(String name,double amout) { 	
+    	System.out.println("name: " + name);
+        System.out.println("amount: " +amout);
     }
 }
 
